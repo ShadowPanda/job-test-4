@@ -19,7 +19,7 @@ gem "font-awesome-rails"
 # Javascripts
 gem "jquery-rails"
 gem "coffee-rails"
-gem "backbone-rails", git: "https://github.com/ShogunPanda/backbone-rails.git", branch: "master"
+gem "backbone-rails"
 
 group :development, :test do
   gem "sqlite3"
