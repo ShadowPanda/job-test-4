@@ -1,0 +1,175 @@
+@charset "utf-8";
+
+@import "compass";
+
+@function e($raw-css) {
+    @return #{$raw-css}
+}
+
+@import "compass_twitter_bootstrap";
+@import "font-awesome";
+
+body{
+	margin-top: 60px;
+}
+
+.hint{
+	color: #A0A0A0;
+}
+
+h1{
+	margin-bottom: 1em;
+}
+
+a.external::after{
+	font-family: FontAwesome;
+	content: " \f08e";
+}
+
+.navbar{
+	.navbar-inner{
+		@include background-image(linear-gradient(#DF7E00, #D13201));
+	}
+
+	.nav{
+		& > li{
+			& > a{
+				color: white;
+
+				&:hover{
+					color: #CCCCCC;
+				}
+			}
+
+			&.active > a{
+				background-color: #DF7E00;
+
+				&:hover{
+					background-color: #DF7E00;
+					color: #CCCCCC;
+				}
+			}
+		}
+	}
+}
+
+.align-right{
+	text-align: right;
+}
+
+.footer{
+	border-top: 1px solid #E5E5E5;
+	padding-top: 1em;
+}
+
+.modal{
+	display: none;
+
+	& > form{
+		margin-bottom: 0;
+	}
+
+	.modal-footer.form-actions{
+		margin-top: 0;
+	}
+
+	textarea{
+		height: 8em;
+	}
+}
+
+.alert{
+	&.alert-loading{
+		text-align: center;
+	}
+
+	& p:first-of-type{
+		margin-top: 1em;
+	}
+
+	& p:last-of-type{
+		margin-bottom: 0;
+	}
+}
+
+.container-overlay{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	@include opacity(0.7);
+	background-color: white;
+}
+
+.news-container{
+	position: relative;
+}
+
+.news-paginator, .comments-paginator, .questions-paginator{
+	min-height: 40px;
+}
+
+.news{
+   padding: 0;
+
+	.number, .host{
+		font-weight: normal;
+		color: #A0A0A0;
+	}
+
+	p.metadata{
+		margin-top: 0;
+		color: #A0A0A0;
+	}
+
+	&:not(.single) p{
+		padding-left: 15px;
+	}
+
+	&.single > .comments-container{
+		padding-top: 2em;
+	}
+}
+
+.comments-container, .questions-container{
+   padding: 0;
+	position: relative;
+
+	& > .element > .alert{
+		padding: 1em;
+		color: black;
+
+		&:not(.alert-success){
+			border: 1px solid #DDDDDD;
+			background-color: #F5F5F5;
+		}
+	}
+}
+
+
+.comment, .question{
+	padding: 0;
+
+	h4{
+		font-weight: normal;
+		color: #A0A0A0;
+	}
+
+	p.metadata{
+	   margin-top: 0;
+		color: #A0A0A0;
+	}
+
+	&:not(.single) .comments-container, &:not(.single) .questions-container{
+		margin-left: 3em;
+	}
+}
+
+.comment-form{
+   form{
+	   padding: 0;
+
+		textarea{
+			height: 8em;
+		}
+   }
+}

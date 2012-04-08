@@ -1,0 +1,64 @@
+<div class="modal" id="dialogs-auth-login">
+	<%= simple_form_for(User.new, url: url_for(controller: :auth, action: "login"), html: {class: "form-horizontal", remote: true, "data-type" => "json"}) do |f| %>
+		<div class="modal-header">
+			<a class="close" data-dismiss="modal"><i class="icon-remove"></i></a>
+			<h3>Login</h3>
+		</div>
+	   <div class="modal-body">
+			<%= f.input :username, label: "Username:", input_html: {class: "span4"} %>
+		   <%= f.input :password, label: "Password:", input_html: {class: "span4"} %>
+		</div>
+	   <div class="modal-footer form-actions">
+		   <button type="submit" class="btn btn-primary"><i class="icon-signin"></i> <span>Login</span></button>
+		</div>
+	<% end %>
+</div>
+
+<div class="modal" id="dialogs-auth-register">
+	<%= simple_form_for(User.new, url: url_for(controller: :auth, action: "register"), html: {class: "form-horizontal", remote: true, "data-type" => "json"}) do |f| %>
+		<div class="modal-header">
+			<a class="close" data-dismiss="modal"><i class="icon-remove"></i></a>
+			<h3>Register</h3>
+		</div>
+	   <div class="modal-body">
+			<%= f.input :username, label: "Username:", input_html: {class: "span4"} %>
+		   <%= f.input :password, label: "Password:", input_html: {class: "span4"} %>
+	      <%= f.input :confirm_password, label: "Confirm password:", input_html: {class: "span4"} %>
+		</div>
+	   <div class="modal-footer form-actions">
+		   <button type="submit" class="btn btn-primary"><i class="icon-user"></i> <span>Register</span></button>
+		</div>
+	<% end %>
+</div>
+
+<div class="modal" id="dialogs-submit-news">
+	<%= simple_form_for(News.new, html: {class: "form-horizontal", remote: true, "data-type" => "json"}) do |f| %>
+		<div class="modal-header">
+			<a class="close" data-dismiss="modal"><i class="icon-remove"></i></a>
+			<h3>Submit news</h3>
+		</div>
+	   <div class="modal-body">
+			<%= f.input :title, label: "Title:", input_html: {class: "span4"} %>
+		   <%= f.input :url, label: "URL:", input_html: {class: "span4"} %>
+		</div>
+	   <div class="modal-footer form-actions">
+		   <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> <span>Submit</span></button>
+		</div>
+	<% end %>
+</div>
+
+<div class="modal" id="dialogs-submit-question">
+	<%= simple_form_for(Question.new, html: {class: "form-horizontal", remote: true, "data-type" => "json"}) do |f| %>
+		<div class="modal-header">
+			<a class="close" data-dismiss="modal"><i class="icon-remove"></i></a>
+			<h3>Submit question</h3>
+		</div>
+	   <div class="modal-body">
+			<%= f.input :title, label: "Title:", input_html: {class: "span4"} %>
+	      <%= f.input :content, as: :text, label: "Description:", input_html: {class: "span4"}, :hint => "You can use <b>Markdown</b> syntax.".html_safe %>
+		</div>
+	   <div class="modal-footer form-actions">
+		   <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> <span>Ask</span></button>
+		</div>
+	<% end %>
+</div>

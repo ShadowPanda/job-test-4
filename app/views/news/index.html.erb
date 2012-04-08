@@ -1,0 +1,17 @@
+<% content_for(:additional_js) do %>
+	<script type="text/javascript">
+		Environment.instance().on("loaded", function(){
+			Environment.instance().set("paginator-url-news", "<%= news_index_path(:page => "__page__") %>");
+			news_list = new NewsList(<%= @records.to_json.html_safe %>);
+		});
+	</script>
+<% end %>
+
+<%= content_for(:title, "News") %>
+
+<section id="news-list">
+	<div id="news-container" class="news-container"></div>
+	<div id="news-paginator" class="news-paginator"></div>
+</section>
+
+<%= render :partial => "partials/news" %>

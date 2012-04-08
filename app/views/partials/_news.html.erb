@@ -1,0 +1,42 @@
+<% content_for(:templates) do %>
+	<script type="text/template" id="templates-news-multi">
+	   <div class="span6">
+	      <h4>
+	         <span class="number">{{index}}</span>
+	         <a class="external" href="{{url}}">{{title}}</a>
+	         <span class="host">({{host}})</span>
+	      </h4>
+	      <p class="metadata">
+	         Posted by <b>{{user.username}}</b> on <b>{{created_at}}</b>
+	      </p>
+	   </div>
+
+	   <div class="span6 align-right">
+	      <%= link_to(news_votes_path("__id__", {positive: true}), {class: :vote, remote: true, method: :post, "data-type" => "json"}) do %><span class="votes-ups">{{votes.ups}}</span> <i class="icon-thumbs-up"></i><% end %>
+	      <%= link_to(news_votes_path("__id__", {positive: false}), {class: :vote, remote: true, method: :post, "data-type" => "json"}) do %><span class="votes-downs">{{votes.downs}}</span> <i class="icon-thumbs-down"></i><% end %>
+	      <br/>
+	      <%= link_to(news_path("__id__"), {class: "pull-right"}) do %><i class="icon-comments"></i> {{CommentsList.label_for(comments.length, "Discuss")}}<% end %>
+	   </div>
+	</script>
+
+	<script type="text/template" id="templates-news-single">
+	   <div class="row-fluid">
+	      <div class="span6">
+	         <h3>
+	            <a class="external" href="{{url}}">{{title}}</a>
+	            <span class="host">({{host}})</span>
+	         </h3>
+	         <p class="metadata">
+	            Posted by <b>{{user.username}}</b> on <b>{{created_at}}</b>
+	         </p>
+	      </div>
+
+	      <div class="span6 align-right">
+	         <%= link_to(news_votes_path("__id__", {positive: true}), {class: :vote, remote: true, method: :post, "data-type" => "json"}) do %><span class="votes-ups">{{votes.ups}}</span> <i class="icon-thumbs-up"></i><% end %>
+	         <%= link_to(news_votes_path("__id__", {positive: false}), {class: :vote, remote: true, method: :post, "data-type" => "json"}) do %><span class="votes-downs">{{votes.downs}}</span> <i class="icon-thumbs-down"></i><% end %>
+	         <br/>
+	         <span><i class="icon-comments"></i> <span class="comments-count">{{CommentsList.label_for(comments.length, "No comments")}}</span></span>
+	      </div>
+	   </div>
+	</script>
+<% end %>

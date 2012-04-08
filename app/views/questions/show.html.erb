@@ -1,0 +1,13 @@
+<% content_for(:additional_js) do %>
+	<script type="text/javascript">
+		Environment.instance().on("loaded", function(){
+			news = new QuestionView({model: new Question(<%= @record.to_json().html_safe %>)});
+			news.renderTo($("#root"), true);
+		});
+	</script>
+<% end %>
+
+<%= content_for(:title, "Question ##{@record.id}: #{@record.title}") %>
+
+<%= render :partial => "partials/questions" %>
+<%= render :partial => "partials/comments" %>

@@ -1,0 +1,12 @@
+<% content_for(:additional_js) do %>
+	<script type="text/javascript">
+		Environment.instance().on("loaded", function(){
+			comment = new CommentView({model: new Comment(<%= @record.to_json.html_safe %>)}, true);
+			comment.renderTo($("#root"), true);
+		});
+	</script>
+<% end %>
+
+<%= content_for(:title, "Discussion on comment ##{@record.id}") %>
+
+<%= render :partial => "partials/comments" %>

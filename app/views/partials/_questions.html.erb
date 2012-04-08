@@ -1,0 +1,45 @@
+<% content_for(:templates) do %>
+	<script type="text/template" id="templates-question-multi">
+		<div class="alert">
+			<div class="row-fluid">
+			   <div class="span6">
+			      <h4><%= link_to("__title__", question_path("__id__"), {class: :external}) %></h4>
+			      <p class="metadata">
+			         Posted by <b>{{user.username}}</b> on <b>{{created_at}}</b>
+			      </p>
+			   </div>
+
+			   <div class="span6 align-right">
+			      <%= link_to(question_votes_path("__id__", {positive: true}), {class: :vote, remote: true, method: :post, "data-type" => "json"}) do %><span class="votes-ups">{{votes.ups}}</span> <i class="icon-thumbs-up"></i><% end %>
+			      <%= link_to(question_votes_path("__id__", {positive: false}), {class: :vote, remote: true, method: :post, "data-type" => "json"}) do %><span class="votes-downs">{{votes.downs}}</span> <i class="icon-thumbs-down"></i><% end %>
+			      <br/>
+			      <%= link_to(question_path("__id__"), {class: "pull-right"}) do %><i class="icon-comments"></i> {{CommentsList.label_for(comments.length, "Reply")}}<% end %>
+			   </div>
+			</div>
+
+		   <div class="question-content">{{content}}</div>
+		</div>
+	</script>
+
+	<script type="text/template" id="templates-question-single">
+	   <div class="alert">
+	      <div class="row-fluid">
+		      <div class="span6">
+		         <h3>{{title}}</h3>
+		         <p class="metadata">
+		            Posted by <b>{{user.username}}</b> on <b>{{created_at}}</b>
+		         </p>
+		      </div>
+
+		      <div class="span6 align-right">
+		         <%= link_to(question_votes_path("__id__", {positive: true}), {class: :vote, remote: true, method: :post, "data-type" => "json"}) do %><span class="votes-ups">{{votes.ups}}</span> <i class="icon-thumbs-up"></i><% end %>
+		         <%= link_to(question_votes_path("__id__", {positive: false}), {class: :vote, remote: true, method: :post, "data-type" => "json"}) do %><span class="votes-downs">{{votes.downs}}</span> <i class="icon-thumbs-down"></i><% end %>
+		         <br/>
+		         <span><i class="icon-comments"></i> <span class="comments-count">{{CommentsList.label_for(comments.length, "No replies")}}</span></span>
+		      </div>
+		   </div>
+
+		   <div class="question-content">{{content}}</div>
+		</div>
+	</script>
+<% end %>

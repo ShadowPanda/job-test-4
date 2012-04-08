@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	   <title><%= yield(:title) %> &laquo; Job Test 5</title>
+	   <%= stylesheet_link_tag "application", media: "all" %>
+	   <%= javascript_include_tag "application" %>
+
+	   <%= yield :additional_css %>
+
+		<script type="text/javascript">
+			Environment.instance().set("params", <%= params.to_json.html_safe %>);
+			Environment.instance().set("user", <%= (@current_user ? @current_user.username : nil).to_json.html_safe %>);
+		</script>
+	   <%= javascript_include_tag params[:controller] %>
+		<%= yield :additional_js %>
+
+	   <%= yield :templates %>
+
+	   <%= csrf_meta_tags %>
+	</head>
+	<body class="<%= @current_user ? "logged" : "" %>">
+		<div class="navbar navbar-fixed-top">
+		   <div class="navbar-inner">
+		      <header class="container">
+		         <%= link_to(:root, class: :brand) do %><i class="icon-bookmark"></i> Hacker News<% end %>
+
+		         <ul class="nav">
+		            <li><%= link_to({controller: :news, action: :index}, {id: "news-refresh"}) do %><i class="icon-refresh"></i> News<% end %></li>
+		            <li><%= link_to(questions_path, {id: "questions-refresh"}) do %><i class="icon-question-sign"></i> Questions<% end %></li>
+		            <li><%= link_to(comments_path, {id: "comments-refresh"}) do %><i class="icon-comments"></i> Comments<% end %></li>
+		            <li><%= link_to({controller: :news, action: :rss}) do %><i class="icon-star"></i> RSS Feed<% end %></li>
+		         </ul>
+
+		         <ul class="nav pull-right">
+		            <% if !@current_user then %>
+		               <li><%= link_to("#dialogs-auth-login", "data-toggle" => "modal") do %><i class="icon-signin"></i> Login<% end %></li>
+		               <li><%= link_to("#dialogs-auth-register", "data-toggle" => "modal") do %><i class="icon-user"></i> Register<% end %></li>
+		            <% else %>
+				         <% if controller.class == NewsController then %>
+		                  <li><%= link_to("#dialogs-submit-news", "data-toggle" => "modal") do %><i class="icon-align-left"></i> Submit news<% end %></li>
+					      <% elsif controller.class == QuestionsController then %>
+		                  <li><%= link_to("#dialogs-submit-question", "data-toggle" => "modal") do %><i class="icon-question-sign"></i> Submit question<% end %></li>
+						   <% end %>
+		               <li><%= link_to({controller: :auth, action: :logout}, id: "auth-logout") do %><i class="icon-signout"></i> Logout (<%= @current_user.username %>)<% end %></li>
+		            <% end %>
+		         </ul>
+		      </header>
+		   </div>
+		</div>
+
+		<div class="container">
+			<h1><%= yield :title %></h1>
+
+		   <div id="alerts"></div>
+			<div id="root"></div>
+		   <%= yield %>
+
+		   <footer class="footer">
+		      <p>&copy; 2012 and above <a class="external" href="http://cowtech.it">Paolo Insogna</a>, released under the <a class="external" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>. Obviously inspired to <a class="external" href="http://news.ycombinator.com/">Y Hacker News</a>.</p>
+		   </footer>
+		</div>
+
+		<div class="dialogs">
+			<%= render partial: "partials/dialogs" %>
+		</div>
+	</body>
+</html>

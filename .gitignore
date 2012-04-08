@@ -1,0 +1,6 @@
+/.bundle
+/db/*.db
+/log/*.log
+/tmp
+/Gemfile.lock
+/.idea

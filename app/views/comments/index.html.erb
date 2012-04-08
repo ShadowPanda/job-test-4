@@ -1,0 +1,18 @@
+<% content_for(:additional_js) do %>
+	<script type="text/javascript">
+		Environment.instance().on("loaded", function(){
+			Environment.instance().set("comments-skip-replies", true);
+			Environment.instance().set("paginator-url-comments", "<%= comments_path(:page => "__page__") %>");
+			comments_list = new CommentsList(<%= @records.to_json.html_safe %>);
+		});
+	</script>
+<% end %>
+
+<%= content_for(:title, "Comments") %>
+
+<section id="comments-list">
+	<div id="comments-container" class="comments-container"></div>
+	<div id="comments-paginator" class="comments-paginator"></div>
+</section>
+
+<%= render :partial => "partials/comments" %>

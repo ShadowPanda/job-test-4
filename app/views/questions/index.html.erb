@@ -1,0 +1,17 @@
+<% content_for(:additional_js) do %>
+	<script type="text/javascript">
+		Environment.instance().on("loaded", function(){
+			Environment.instance().set("paginator-url-questions", "<%= questions_path(:page => "__page__") %>");
+			questions_list = new QuestionsList(<%= @records.to_json.html_safe %>);
+		});
+	</script>
+<% end %>
+
+<%= content_for(:title, "Questions") %>
+
+<section id="questions-list">
+	<div id="questions-container" class="questions-container"></div>
+	<div id="questions-paginator" class="questions-paginator"></div>
+</section>
+
+<%= render :partial => "partials/questions" %>

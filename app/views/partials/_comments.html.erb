@@ -1,0 +1,60 @@
+<% content_for(:additional_js) do %>
+   <script type="text/javascript">
+	   Environment.instance().set("urls-comments", {
+		   "news": "<%= news_comments_path("__id__") %>",
+		   "questions": "<%= question_comments_path("__id__") %>",
+		   "comments": "<%= comment_comments_path("__id__") %>"
+	   });
+   </script>
+<% end %>
+
+<% content_for(:templates) do %>
+   <script id="templates-comment-multi" type="text/template">
+      <div class="alert">
+         <div class="row-fluid">
+            <div class="span6">
+               <h4 class="metadata"><b>{{user.username}}</b> said on <b>{{created_at}}</b>:</h4>
+            </div>
+
+            <div class="span6 align-right">
+               <%= link_to("<i class=\"icon-comment\"></i> Reply".html_safe, comment_path("__id__")) %>
+               &nbsp;
+               <%= link_to(comment_votes_path("__id__", {positive: true}), {class: :vote, remote: true, method: :post, "data-type" => "json"}) do %><span class="votes-ups">{{votes.ups}}</span> <i class="icon-thumbs-up"></i><% end %>
+               <%= link_to(comment_votes_path("__id__", {positive: false}), {class: :vote, remote: true, method: :post, "data-type" => "json"}) do %><span class="votes-downs">{{votes.downs}}</span> <i class="icon-thumbs-down"></i><% end %>
+            </div>
+         </div>
+
+         <div class="comment-content">{{content}}</div>
+      </div>
+   </script>
+
+   <script id="templates-comment-single" type="text/template">
+      <div class="alert">
+         <div class="row-fluid">
+            <div class="span6">
+               <h3 class="metadata"><b>{{user.username}}</b> said on <b>{{created_at}}</b>:</h3>
+            </div>
+
+            <div class="span6 align-right">
+               <%= link_to(comment_votes_path("__id__", {positive: true}), {class: :vote, remote: true, method: :post, "data-type" => "json"}) do %><span class="votes-ups">{{votes.ups}}</span> <i class="icon-thumbs-up"></i><% end %>
+               <%= link_to(comment_votes_path("__id__", {positive: false}), {class: :vote, remote: true, method: :post, "data-type" => "json"}) do %><span class="votes-downs">{{votes.downs}}</span> <i class="icon-thumbs-down"></i><% end %>
+					<br/>
+               <span><i class="icon-comments"></i> <span class="comments-count">{{CommentsList.label_for(comments.length, "No comments")}}</span></span>
+            </div>
+         </div>
+
+         <div class="comment-content">{{content}}</div>
+      </div>
+   </script>
+
+   <script id="templates-comment-form" type="text/template">
+      <%= simple_form_for(Comment.new, {url: "__url__", html: {id: "comment-edit", class: "container-fluid", remote: true}}) do |f| %>
+         <%= f.input :content, as: :text, label: false, input_html: {class: "span12"} %>
+
+         <div class="row-fluid">
+            <div class="span6"><span class="hint">You can use <b>Markdown</b> syntax.</span></div>
+            <div class="span6 align-right"><button type="submit" class="btn btn-primary"><i class="icon-comment"></i> <span>{{label}}</span></button></div>
+         </div>
+      <% end %>
+   </script>
+<% end %>
