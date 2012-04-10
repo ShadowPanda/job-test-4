@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Question < ActiveRecord::Base
-	include Common
+	include ::Common
 
 	belongs_to :user
 	has_many :comments, as: :commentable, order: "updated_at DESC"
