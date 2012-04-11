@@ -15,5 +15,6 @@ module JobTest5
 		config.assets.version = '1.0'
 		config.sass.line_comments = false
 		config.sass.style = :compact
+		config.autoload_paths += Rails.root + "app/classes"
 	end
 end
