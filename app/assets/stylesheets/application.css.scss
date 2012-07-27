@@ -26,8 +26,18 @@ a.external::after{
 	content: " \f08e";
 }
 
+.forker{
+	display: block;
+	position: absolute; 
+	top: 0; 
+	right: 0; 
+	border: 0;
+	z-index: 9999;
+}
+
 .navbar{
 	.navbar-inner{
+		@include border-radius(0px);
 		@include background-image(linear-gradient(#DF7E00, #D13201));
 	}
 
